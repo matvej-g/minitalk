@@ -6,7 +6,7 @@
 /*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:49:40 by mgering           #+#    #+#             */
-/*   Updated: 2024/04/17 16:28:30 by mgering          ###   ########.fr       */
+/*   Updated: 2024/04/18 17:46:29 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	main(void)
 	pid = getpid();
 	sa.sa_sigaction = signal_handler;
 	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SIGINT);
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
