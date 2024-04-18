@@ -1,17 +1,17 @@
 CLIENT	= client
 SERVER	= server
 
-LIBFTPRINTF		= resource/ft_printf/libftprintf.a
-LIBFTPRINTF_DIR	= resource/ft_printf
+LIBFTPRINTF		= ./resource/ft_printf/libftprintf.a
+LIBFTPRINTF_DIR	= ./resource/ft_printf
 
-LIBFT		= resource/libft/libft.a
-LIBFT_DIR	= resource/libft
+LIBFT		= ./resource/libft/libft.a
+LIBFT_DIR	= ./resource/libft
 
 SRC_S	= server.c
 SRC_C	= client.c
 
-OBJ_S	= server.o
-OBJ_C	= client.o
+OBJ_S	= $(SRC_S:.c=.o)
+OBJ_C	= $(SRC_C:.c=.o)
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
@@ -35,13 +35,14 @@ $(LIBFT) :
 %.o : %.c
 	@ $(CC) $(CFLAGS) -c $< -o $@
 
+
 clean :
 	@ $(MAKE) clean -C $(LIBFTPRINTF_DIR)
 	@ $(MAKE) clean -C $(LIBFT_DIR)
 	@ rm -rf $(OBJ_S) $(OBJ_C)
 	@ printf "object files removed.\n"
 
-fclean :
+fclean : clean
 	@ $(MAKE) fclean -C $(LIBFTPRINTF_DIR)
 	@ $(MAKE) fclean -C $(LIBFT_DIR)
 	@ rm -rf $(SERVER) $(CLIENT)

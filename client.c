@@ -6,7 +6,7 @@
 /*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:14:12 by mgering           #+#    #+#             */
-/*   Updated: 2024/04/17 16:49:47 by mgering          ###   ########.fr       */
+/*   Updated: 2024/04/18 15:14:59 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ int	main(int argc, char *argv[])
 	sigset_t			mask;
 	int					sig;
 
+	if (argc != 3)
+	{
+		write(1, "\x1b[31mUsage: ./client <server_pid> <string>\x1b[0m\n", 48);
+		return (1);
+	}
 	sa.sa_sigaction = signal_handler;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_SIGINFO;
@@ -75,11 +80,6 @@ int	main(int argc, char *argv[])
 	sigaction(SIGUSR2, &sa, NULL);
 	server_pid = ft_atoi(argv[1]);
 	message = argv[2];
-	if (argc != 3)
-	{
-		write(1, "\x1b[31mUsage: ./client <server_pid> <string>\x1b[0m\n", 48);
-		return (1);
-	}
 	if (message_to_bit(message, server_pid) == 0)
 		end_of_line(server_pid);
 	sigwait(&mask, &sig);
