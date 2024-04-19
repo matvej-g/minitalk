@@ -6,7 +6,7 @@
 /*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:14:12 by mgering           #+#    #+#             */
-/*   Updated: 2024/04/18 15:14:59 by mgering          ###   ########.fr       */
+/*   Updated: 2024/04/19 14:46:26 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int	main(int argc, char *argv[])
 	pid_t				server_pid;
 	char				*message;
 	struct sigaction	sa;
-	sigset_t			mask;
-	int					sig;
 
 	if (argc != 3)
 	{
@@ -82,6 +80,5 @@ int	main(int argc, char *argv[])
 	message = argv[2];
 	if (message_to_bit(message, server_pid) == 0)
 		end_of_line(server_pid);
-	sigwait(&mask, &sig);
 	return (0);
 }
