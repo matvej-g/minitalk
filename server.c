@@ -6,7 +6,7 @@
 /*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:49:40 by mgering           #+#    #+#             */
-/*   Updated: 2024/04/18 17:46:29 by mgering          ###   ########.fr       */
+/*   Updated: 2024/04/20 16:04:12 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	signal_handler(int signum, siginfo_t *info, void *context)
 			free (message);
 			message = NULL;
 			kill(info->si_pid, SIGUSR2);
-			write(1, "\x1b[32mWaiting for Client:\x1b[0m\n", 30);
+			ft_printf("\x1b[32m[PID:%d] Wait for Client:\x1b[0m\n", getpid());
 		}
 		bit_index = 0;
 		character = 0;
@@ -73,7 +73,6 @@ int	main(void)
 	pid = getpid();
 	sa.sa_sigaction = signal_handler;
 	sigemptyset(&sa.sa_mask);
-	sigaddset(&sa.sa_mask, SIGINT);
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);

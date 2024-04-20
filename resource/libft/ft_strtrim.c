@@ -6,7 +6,7 @@
 /*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:43:48 by mgering           #+#    #+#             */
-/*   Updated: 2023/11/02 14:48:41 by mgering          ###   ########.fr       */
+/*   Updated: 2024/04/20 16:55:00 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ set: The reference set of characters to trim.*/
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*ptr;
-	size_t	i;
 	size_t	start;
 	size_t	end;
 
-	i = 0;
 	start = 0;
 	end = ft_strlen(s1);
 	if (!s1 || !set)

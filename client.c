@@ -6,11 +6,13 @@
 /*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:14:12 by mgering           #+#    #+#             */
-/*   Updated: 2024/04/19 14:46:26 by mgering          ###   ########.fr       */
+/*   Updated: 2024/04/20 16:38:53 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+volatile sig_atomic_t	g_flag = 1;
 
 void	signal_handler(int signum, siginfo_t *info, void *context)
 {
@@ -18,6 +20,7 @@ void	signal_handler(int signum, siginfo_t *info, void *context)
 	if (signum == SIGUSR2)
 	{
 		ft_printf("\x1b[32mPID:%d recived Message\x1b[0m\n", info->si_pid);
+		g_flag = 0;
 	}
 }
 
@@ -41,21 +44,25 @@ int	message_to_bit(char *message, pid_t server_pid)
 	int		bit_index;
 	int		bit_to_send;
 
-	i = 0;
-	while (message[i] != '\0')
+	i = -1;
+	while (message[++i] != '\0')
 	{
-		bit_index = 7;
-		while (bit_index >= 0)
+		bit_index = 8;
+		while (--bit_index >= 0)
 		{
 			bit_to_send = ((int)message[i] >> bit_index) & 1;
 			if (bit_to_send == 1)
-				kill(server_pid, SIGUSR1);
+			{
+				if (kill(server_pid, SIGUSR1) == -1)
+					return (1);
+			}
 			else
-				kill(server_pid, SIGUSR2);
+			{
+				if (kill(server_pid, SIGUSR2) == -1)
+					return (1);
+			}
 			usleep(100);
-			bit_index--;
 		}
-		i++;
 	}
 	return (0);
 }
@@ -79,6 +86,12 @@ int	main(int argc, char *argv[])
 	server_pid = ft_atoi(argv[1]);
 	message = argv[2];
 	if (message_to_bit(message, server_pid) == 0)
+	{
 		end_of_line(server_pid);
+		while (g_flag == 1)
+			pause();
+	}
+	else if (message_to_bit(message, server_pid) == -1)
+		perror("Error sending message");
 	return (0);
 }

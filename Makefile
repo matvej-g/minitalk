@@ -19,11 +19,11 @@ CFLAGS	= -Wall -Wextra -Werror
 all : $(LIBFT) $(LIBFTPRINTF) $(SERVER) $(CLIENT)
 
 $(SERVER) : $(OBJ_S) minitalk.h
-	@ $(CC) $(CFLAGS) $(LIBFT) $(LIBFTPRINTF) -o $@ $(OBJ_S)
+	@ $(CC) $(CFLAGS) -o $@ $(OBJ_S) $(LIBFT) $(LIBFTPRINTF)
 	@printf "server ready. \n"
 
 $(CLIENT) : $(OBJ_C) minitalk.h
-	@ $(CC) $(CFLAGS) $(LIBFT) $(LIBFTPRINTF) -o $@ $(OBJ_C)
+	@ $(CC) $(CFLAGS) -o $@ $(OBJ_C) $(LIBFT) $(LIBFTPRINTF)
 	@printf "client ready. \n"
 
 $(LIBFTPRINTF) :
