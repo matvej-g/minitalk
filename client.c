@@ -6,7 +6,7 @@
 /*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:14:12 by mgering           #+#    #+#             */
-/*   Updated: 2024/04/20 17:21:34 by mgering          ###   ########.fr       */
+/*   Updated: 2024/04/20 17:47:56 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,10 @@ int	main(int argc, char *argv[])
 	pid_t				server_pid;
 	char				*message;
 	struct sigaction	sa;
+	int					result;
 
 	if (argc != 3)
-	{
-		write(1, "\x1b[31mUsage: ./client <server_pid> <string>\x1b[0m\n", 48);
-		return (1);
-	}
+		return (ft_printf("Usage: ./client <server_pid> <string>"), 1);
 	sa.sa_sigaction = signal_handler;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_SIGINFO;
@@ -85,13 +83,14 @@ int	main(int argc, char *argv[])
 	sigaction(SIGUSR2, &sa, NULL);
 	server_pid = ft_atoi(argv[1]);
 	message = argv[2];
-	if (message_to_bit(message, server_pid) == 0)
+	result = message_to_bit(message, server_pid);
+	if (result == 0)
 	{
 		end_of_line(server_pid);
 		while (g_flag == 1)
 			pause();
 	}
-	else if (message_to_bit(message, server_pid) == -1)
+	else if (result == -1)
 		perror("Error sending message");
 	return (0);
 }
