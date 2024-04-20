@@ -6,7 +6,7 @@
 /*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:14:12 by mgering           #+#    #+#             */
-/*   Updated: 2024/04/20 16:38:53 by mgering          ###   ########.fr       */
+/*   Updated: 2024/04/20 17:21:34 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int	message_to_bit(char *message, pid_t server_pid)
 			if (bit_to_send == 1)
 			{
 				if (kill(server_pid, SIGUSR1) == -1)
-					return (1);
+					return (-1);
 			}
 			else
 			{
 				if (kill(server_pid, SIGUSR2) == -1)
-					return (1);
+					return (-1);
 			}
 			usleep(100);
 		}
