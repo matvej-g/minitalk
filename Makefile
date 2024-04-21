@@ -31,6 +31,7 @@ $(LIBFTPRINTF) :
 
 $(LIBFT) :
 	@ $(MAKE) -C $(LIBFT_DIR)
+	@ $(MAKE) bonus -C $(LIBFT_DIR)
 
 %.o : %.c
 	@ $(CC) $(CFLAGS) -c $< -o $@
