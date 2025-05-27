@@ -52,6 +52,6 @@ The **client** takes the server’s PID and your message string, then sends it b
    ```bash
    ./client 64816 "Hello World"
    ```
-   ![minitalk server example](images/client.png)
+   ![minitalk server example](images/client.png) <br>
 Server will recive the message and wait for more signals
    ![minitalk server example](images/server2.png)
