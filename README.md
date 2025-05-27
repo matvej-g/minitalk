@@ -18,8 +18,7 @@ The **client** takes the server’s PID and your message string, then sends it b
 ## Features
 - **Signal-based IPC**: Uses `kill()` to send `SIGUSR1` and `SIGUSR2`.  
 - **Bitwise encoding**: Transmits each character one bit at a time. 
-- **Acknowledgements**: Server sends a confirmation signal back after each byte.  
-- **Graceful exit**: Client and server handle unexpected terminations cleanly.  
+- **Acknowledgements**: Server sends a confirmation signal back after whole message is send.  
 - **Norm-compliant**:  
   - Only permitted functions
   - 25 lines max per function.  
