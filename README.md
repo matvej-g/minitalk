@@ -46,7 +46,7 @@ The **client** takes the server’s PID and your message string, then sends it b
    ```bash
    ./server
    ```
-   ![minitalk server example](image/server.png)
+   ![minitalk server example](images/server.png)
 
 2. Use the servers PID that is shown when starting the server
    ```bash
