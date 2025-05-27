@@ -48,8 +48,10 @@ The **client** takes the server’s PID and your message string, then sends it b
    ```
    ![minitalk server example](images/server.png)
 
-2. Use the servers PID that is shown when starting the server
+2. Use a seccond terminal window for the client to send a message to Server, use the Servers PID that is shown from Server
    ```bash
-   ./client 64210 "Hello World"
+   ./client 64816 "Hello World"
    ```
-
+   ![minitalk server example](images/client.png)
+Server will recive the message and wait for more signals
+   ![minitalk server example](images/server2.png)
