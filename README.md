@@ -10,7 +10,6 @@ A simple, Norm-compliant pair of C programs (`server` and `client`) that communi
 - [Features](#features)  
 - [Installation](#installation)  
 - [Usage](#usage)  
-- [Example](#example)  
 
 `minitalk` implements inter-process communication by encoding each byte of your message into a sequence of `SIGUSR1` and `SIGUSR2` signals.  
 The **server** listens for incoming signals, reconstructs the bytes, and prints the received message to stdout.  
@@ -53,5 +52,5 @@ The **client** takes the server’s PID and your message string, then sends it b
    ./client 64816 "Hello World"
    ```
    ![minitalk server example](images/client.png) <br>
-Server will recive the message and wait for more signals
+Server will recive the message and wait for more signals <br>
    ![minitalk server example](images/server2.png)
